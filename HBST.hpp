@@ -53,7 +53,23 @@ public:
         printTree("", root, false);
     }
 
+    ~HBST() {
+        destruct(root);
+    }
+
 private:
+
+    void destruct(NodeT* r) {
+        if (!r) {
+            return;
+        }
+
+        destruct(r->left);
+        destruct(r->right);
+
+        delete r;
+    }
+
     void insert(NodeT** r, NodeT *parent, const size_t newHiddenKey, const ValueT& newValue, size_t min, size_t max) {
         if (!(*r)) {
             *r = new NodeT(newHiddenKey, newValue, parent);
